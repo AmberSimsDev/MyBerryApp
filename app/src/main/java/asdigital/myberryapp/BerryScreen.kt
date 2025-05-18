@@ -27,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import asdigital.myberryapp.ui.MainViewModel
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-//TODO Text
+
 @Composable
 fun pokeScreen(modifier: Modifier = Modifier) {
     val berryViewModel: MainViewModel = viewModel()
