@@ -37,7 +37,7 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
     // Launch a coroutine to fetch the berry details
     LaunchedEffect(key1 = berryName) {
         if (!berryName.isNullOrEmpty()) {
-            viewModel.fetchBerryDetails(berryName)
+            viewModel.load(berryName)
         }
     }
 
@@ -46,22 +46,34 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
             .padding(8.dp)
             .fillMaxSize()
             .clickable {
-             //  navController.navigate(Routes.pokeScreen)
-                       navController.popBackStack() //This is a back button
+                //  navController.navigate(Routes.pokeScreen)
+                navController.popBackStack() //This is a back button
             }, // Closing bracket for clickable modifier
         horizontalAlignment = Alignment.CenterHorizontally
     ) { // Opening bracket for Column content
-        AsyncImage(
-            model = getBerrySpriteUrl("$berryName"),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .aspectRatio(1f)
-        )
+//        AsyncImage(
+//            model = getBerrySpriteUrl("$berryName"),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .aspectRatio(1f)
+//        )
 
-        //CONVERT DATA CLASS TO STRINGS
-        fun formatBerryDetails(detailTextItem: BerryDetail): String {
-            return """
+
+        detailItem?.let { //TODO study this more
+            // LETS MAKE IT SO WE CAN SCROLL THE TEXT
+            Text(
+                text = formatBerryDetails(detailTextItem = it),
+                textAlign = TextAlign.Justify,
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            )
+        } // Closing bracket for Column content
+    }
+}
+
+//CONVERT DATA CLASS TO STRINGS
+fun formatBerryDetails(detailTextItem: BerryDetail): String {
+    return """
               ID: ${detailTextItem.id}
               Name: ${detailTextItem.name}
               Growth Time: ${detailTextItem.growthtime}
@@ -75,19 +87,7 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
               Item: ${detailTextItem.item.name}
               Natural Gift Type: ${detailTextItem.naturalgifttype.name}
     """.trimIndent()
-        }
-        detailItem?.let { //TODO study this more
-            // LETS MAKE IT SO WE CAN SCROLL THE TEXT
-            Text(
-                text = formatBerryDetails(detailTextItem = it),
-                textAlign = TextAlign.Justify,
-                modifier = Modifier.verticalScroll(rememberScrollState())
-            )
-        } // Closing bracket for Column content
-    }
 }
-
-
 /*
 val name = remember { mutableStateOf("") }
     Column(modifier = Modifier
