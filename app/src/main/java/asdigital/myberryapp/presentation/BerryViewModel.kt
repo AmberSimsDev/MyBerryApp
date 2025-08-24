@@ -5,8 +5,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import asdigital.myberryapp.data.Berry
-import asdigital.myberryapp.data.remote.pokeService
+import asdigital.myberryapp.data.remote.model.Berry
+import asdigital.myberryapp.data.remote.api.pokeService
 import kotlinx.coroutines.launch
 
 

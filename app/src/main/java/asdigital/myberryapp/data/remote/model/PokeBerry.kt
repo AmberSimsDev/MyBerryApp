@@ -1,9 +1,9 @@
-package asdigital.myberryapp.data
+package asdigital.myberryapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
 data class Berry(
-    val name: String,
+    val name: String
 
 )
 

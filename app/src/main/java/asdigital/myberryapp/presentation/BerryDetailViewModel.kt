@@ -1,19 +1,10 @@
 package asdigital.myberryapp.presentation
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import asdigital.myberryapp.data.Berry
-import asdigital.myberryapp.data.BerryDetail
-import asdigital.myberryapp.data.Firmness
-import asdigital.myberryapp.data.Flavor
-import asdigital.myberryapp.data.Flavors
-import asdigital.myberryapp.data.Item
-import asdigital.myberryapp.data.NaturalGiftType
-import asdigital.myberryapp.data.remote.PokemonApiService
-import asdigital.myberryapp.data.remote.pokeService
+import asdigital.myberryapp.data.remote.model.BerryDetail
+import asdigital.myberryapp.data.remote.api.pokeService
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

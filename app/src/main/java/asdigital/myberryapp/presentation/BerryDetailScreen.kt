@@ -19,12 +19,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import asdigital.myberryapp.data.Berry
-import asdigital.myberryapp.data.BerryDetail
-import asdigital.myberryapp.data.remote.getBerrySpriteUrl
+import asdigital.myberryapp.data.remote.model.BerryDetail
+import asdigital.myberryapp.data.remote.api.getBerrySpriteUrl
 import coil.compose.AsyncImage
-import navigation.Routes
 
 // navigateToDetail: (BerryDetail) -> Unit
 

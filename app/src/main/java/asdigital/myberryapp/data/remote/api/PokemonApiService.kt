@@ -1,13 +1,11 @@
-package asdigital.myberryapp.data.remote
+package asdigital.myberryapp.data.remote.api
 
-import asdigital.myberryapp.data.BerryDetail
-import asdigital.myberryapp.data.BerryDetailResponse
-import asdigital.myberryapp.data.BerryResponse
+import asdigital.myberryapp.data.remote.model.BerryDetail
+import asdigital.myberryapp.data.remote.model.BerryResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Url
 
 private val retrofit = Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/")
     .addConverterFactory(GsonConverterFactory.create()).build()
