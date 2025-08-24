@@ -1,5 +1,6 @@
 package asdigital.myberryapp.presentation
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import asdigital.myberryapp.data.Berry
+import asdigital.myberryapp.data.BerryDetail
 import asdigital.myberryapp.data.remote.getBerrySpriteUrl
 import coil.compose.AsyncImage
 import navigation.Routes
@@ -63,7 +65,7 @@ fun berryScreen(pokeBerries: List<Berry>, navController: NavController) {
 
 //How each item looks
 @Composable
-fun berryItemView(berryItem: Berry,navController: NavController ) {
+fun berryItemView(berryItem: Berry, navController: NavController ) {
     Column(
         modifier = Modifier
             .padding(6.dp)
@@ -76,13 +78,11 @@ fun berryItemView(berryItem: Berry,navController: NavController ) {
             model = getBerrySpriteUrl(berryItem.name),
             contentDescription = null,
             modifier = Modifier
-                .wrapContentSize()
-                .aspectRatio(2f)
+                .wrapContentSize().aspectRatio(2f)
                 .padding(top = 30.dp)
-                .clickable { navController.navigate("berryDetailScreen/${berryItem.name}")}
+                .clickable{ navController.navigate("berryDetailScreen/${berryItem.name}")
+                }
         )
-
-
         Text(
             text = berryItem.name,
             color = Color.White,

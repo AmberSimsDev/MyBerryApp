@@ -1,39 +1,39 @@
 package asdigital.myberryapp.data
 
+import com.google.gson.annotations.SerializedName
+
 data class Berry(
     val name: String,
 
 )
 
-data class BerryResponse(
-    val results: List<Berry>
-    //val count: Int,
-    //val next: String?,
-    // val previous: String?,
-)
+//data class BerryResponse(
+//    val results: List<Berry>
+//    //val count: Int,
+//    //val next: String?,
+//    // val previous: String?,
+//)
+//data class BerryDetailResponse(
+//    val results: List<BerryDetail>,
+//    val url: String
+//)
+
+data class BerryResponse( val results: List<Berry>)
+data class BerryDetailResponse(val berryDetail: List<BerryDetail>)
 
 data class BerryDetail(
     val id: Int,
     val name: String,
-    val growthtime: Int,
-    val maxharvest:Int,
-    val naturalgiftpower: Int,
+    @SerializedName("growth_time") val growthTime: Int,
+    @SerializedName("max_harvest") val maxHarvest: Int,
+    @SerializedName("natural_gift_power") val naturalGiftPower: Int,
     val size: Int,
     val smoothness:Int,
-    val soildryness: Int,
+    @SerializedName("soil_dryness") val soilDryness: Int,
     val firmness: Firmness,
-    val flavors: Flavors,
+    val flavors: List<Flavors>,
     val item: Item,
-    val naturalgifttype: NaturalGiftType
-)
-
-data class PokeBerryResponse( var berry: List<Berry>)
-data class PokeBerryDetailsResponse(var berryDetail: List<BerryDetail>)
-
-
-data class Firmness (
-   val name: String,
-   val url: String
+    @SerializedName("natural_gift_type") val naturalGiftType: NaturalGiftType
 )
 
 data class Flavors (
@@ -41,6 +41,11 @@ data class Flavors (
     val flavor: Flavor
 )
 data class Flavor(
+    val name: String,
+    val url: String
+)
+
+data class Firmness (
     val name: String,
     val url: String
 )
@@ -55,7 +60,5 @@ data class NaturalGiftType(
     val url: String
 )
 
-data class BerryDetailResponse(
-    val results: List<BerryDetail>,
-    val url: String
-)
+
+

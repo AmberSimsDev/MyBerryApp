@@ -20,7 +20,7 @@ fun pokeNavigation() {
         composable(Routes.pokeScreen) {
             pokeScreen(modifier = Modifier, navController = navController)
         }
-        composable(route = Routes.berryDetailScreen,
+        composable(Routes.berryDetailScreen,
             arguments = listOf(navArgument("berryName") { type = NavType.StringType })
         ) { backStackEntry ->
             val berryName = backStackEntry.arguments?.getString("berryName")

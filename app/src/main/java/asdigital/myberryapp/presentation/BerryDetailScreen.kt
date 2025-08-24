@@ -1,6 +1,7 @@
 package asdigital.myberryapp.presentation
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,29 +38,26 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
     // Launch a coroutine to fetch the berry details
     LaunchedEffect(key1 = berryName) {
         if (!berryName.isNullOrEmpty()) {
-            viewModel.load(berryName)
+            viewModel.fetchBerryDetails(berryName)
         }
     }
 
     Column(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(16.dp)
             .fillMaxSize()
             .clickable {
                 //  navController.navigate(Routes.pokeScreen)
                 navController.popBackStack() //This is a back button
             }, // Closing bracket for clickable modifier
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceEvenly
     ) { // Opening bracket for Column content
-//        AsyncImage(
-//            model = getBerrySpriteUrl("$berryName"),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .aspectRatio(1f)
-//        )
-
-
+        AsyncImage(
+            model = getBerrySpriteUrl("$berryName"),
+            contentDescription = null,
+            modifier = Modifier
+                .aspectRatio(6f)
+        )
         detailItem?.let { //TODO study this more
             // LETS MAKE IT SO WE CAN SCROLL THE TEXT
             Text(
@@ -76,16 +74,16 @@ fun formatBerryDetails(detailTextItem: BerryDetail): String {
     return """
               ID: ${detailTextItem.id}
               Name: ${detailTextItem.name}
-              Growth Time: ${detailTextItem.growthtime}
-              Max Harvest: ${detailTextItem.maxharvest}
-              Natural Gift Power: ${detailTextItem.naturalgiftpower}
+              Growth Time: ${detailTextItem.growthTime}
+              Max Harvest: ${detailTextItem.maxHarvest}
+              Natural Gift Power: ${detailTextItem.naturalGiftPower}
               Size: ${detailTextItem.size}
               Smoothness: ${detailTextItem.smoothness}
-              Soil Dryness: ${detailTextItem.soildryness}
+              Soil Dryness: ${detailTextItem.soilDryness}
               Firmness: ${detailTextItem.firmness.name}
-              Flavor: ${detailTextItem.flavors.flavor.name}
+              Flavor:${detailTextItem.flavors.firstOrNull()?.flavor?.name ?: "N/A"}
               Item: ${detailTextItem.item.name}
-              Natural Gift Type: ${detailTextItem.naturalgifttype.name}
+              Natural Gift Type: ${detailTextItem.naturalGiftType.name}
     """.trimIndent()
 }
 /*
