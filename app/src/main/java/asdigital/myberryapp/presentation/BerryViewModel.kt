@@ -1,19 +1,16 @@
-package asdigital.myberryapp.ui
+package asdigital.myberryapp.presentation
 
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import asdigital.myberryapp.Berry
-import asdigital.myberryapp.pokeService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import asdigital.myberryapp.data.Berry
+import asdigital.myberryapp.data.remote.pokeService
 import kotlinx.coroutines.launch
 
 
-class MainViewModel : ViewModel() {
+class BerryViewModel : ViewModel() {
     private val _berryState = mutableStateOf(PokeState())
     val berryState: State<PokeState> = _berryState
 

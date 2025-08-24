@@ -1,9 +1,7 @@
-package asdigital.myberryapp
+package asdigital.myberryapp.presentation
 
-import android.graphics.fonts.FontStyle
-import android.health.connect.datatypes.WeightRecord
 import android.util.Log
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -24,13 +22,18 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import asdigital.myberryapp.ui.MainViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import asdigital.myberryapp.data.Berry
+import asdigital.myberryapp.data.BerryDetail
+import asdigital.myberryapp.data.remote.getBerrySpriteUrl
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
+import navigation.Routes
+
 
 @Composable
-fun pokeScreen(modifier: Modifier = Modifier) {
-    val berryViewModel: MainViewModel = viewModel()
+fun pokeScreen(modifier: Modifier, navController : NavController) {
+    val berryViewModel: BerryViewModel = viewModel()
     val viewState by berryViewModel.berryState
     Box(modifier = Modifier.fillMaxSize()) {
         when {
@@ -43,7 +46,7 @@ fun pokeScreen(modifier: Modifier = Modifier) {
             }
 
             else -> {
-                berryScreen(pokeBerries = viewState.list)
+                berryScreen(pokeBerries = viewState.list, navController = navController)
             } //Display categories
         }
     }
@@ -51,10 +54,10 @@ fun pokeScreen(modifier: Modifier = Modifier) {
 
 //Has the list of each berry item
 @Composable
-fun berryScreen(pokeBerries: List<Berry>) {
+fun berryScreen(pokeBerries: List<Berry>, navController: NavController) {
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(pokeBerries) { berry ->
-            berryItemView(berryItem = berry)
+            berryItemView(berryItem = berry, navController = navController)
         }
     }
 
@@ -62,7 +65,7 @@ fun berryScreen(pokeBerries: List<Berry>) {
 
 //How each item looks
 @Composable
-fun berryItemView(berryItem: Berry) {
+fun berryItemView(berryItem: Berry, navController: NavController ) {
     Column(
         modifier = Modifier
             .padding(6.dp)
@@ -70,17 +73,16 @@ fun berryItemView(berryItem: Berry) {
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        Log.w(">>", "sprite URL: ${getBerrySpriteUrl(berryItem.name)}")
+        //Log.w(">>", "sprite URL: ${getBerrySpriteUrl(berryItem.name)}")
         AsyncImage(
-            model = getBerrySpriteUrl(berryItem.name)
-            ,
+            model = getBerrySpriteUrl(berryItem.name),
             contentDescription = null,
             modifier = Modifier
-                .wrapContentSize()
-                .aspectRatio(2f).padding(top = 30.dp)
+                .wrapContentSize().aspectRatio(2f)
+                .padding(top = 30.dp)
+                .clickable{ navController.navigate("berryDetailScreen/${berryItem.name}")
+                }
         )
-
-
         Text(
             text = berryItem.name,
             color = Color.White,
@@ -90,3 +92,7 @@ fun berryItemView(berryItem: Berry) {
     }
 
 }
+
+
+
+
