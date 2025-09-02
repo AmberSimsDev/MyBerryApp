@@ -1,8 +1,10 @@
 import asdigital.myberryapp.data.remote.model.Berry
 import asdigital.myberryapp.data.remote.model.BerryDetail
+import asdigital.myberryapp.data.remote.model.Firmness
+import asdigital.myberryapp.data.remote.model.Flavors
+import asdigital.myberryapp.data.remote.model.Item
 import asdigital.myberryapp.data.remote.model.NaturalGiftType
 import com.google.gson.annotations.SerializedName
-
 
 //data class BerryResponse( val results: List<Berry>)
 //data class BerryDetailResponse(val berryDetail: List<BerryDetail>)
@@ -28,11 +30,6 @@ data class BerryDTO(
 
 //HERE WE HAVE OUR GETTERS
 
-fun getFirmness.toDto(): FirmDTO{
-    return FirmDTO{
-        firmness = berryDetail
-    }
-}
 fun getBerryDetailDTOList(berryDetail: List<BerryDetail>): List<BerryDetailDTO> {
     return berryDetail.map { details ->
         BerryDetailDTO(
@@ -44,11 +41,10 @@ fun getBerryDetailDTOList(berryDetail: List<BerryDetail>): List<BerryDetailDTO> 
             size = details.size,
             smoothness = details.smoothness,
             soilDryness = details.soilDryness,
-            firmness = details.firmness.Firmness,
-            flavors = details.flavors.toDto,
+            firmness = details.firmness,
+            flavors = details.flavors,
             item = details.item,
-            naturalGiftType = details.naturalGiftType,
-
+            naturalGiftType = details.naturalGiftType
         )
     }
 }
@@ -67,40 +63,22 @@ fun getBerryDTOList(results: List<Berry>): List<BerryDTO> {
 data class Berry(
     val name: String
 )
-
-
-data class BerryDetail(
-    val id: Int,
-    val name: String,
-    @SerializedName("growth_time") val growthTime: Int,
-    @SerializedName("max_harvest") val maxHarvest: Int,
-    @SerializedName("natural_gift_power") val naturalGiftPower: Int,
-    val size: Int,
-    val smoothness: Int,
-    @SerializedName("soil_dryness") val soilDryness: Int,
-    val firmness: Firmness,
-    val flavors: List<Flavors>,
-    val item: Item,
-    @SerializedName("natural_gift_type") val naturalGiftType: NaturalGiftType
-)
-
-data class Flavors(
+data class Flavors (
     val potency: Int,
     val flavor: Flavor
 )
-
 data class Flavor(
     val name: String,
     val url: String
 )
 
-data class Firmness(
+data class Firmness (
     val name: String,
     val url: String
 )
 
-data class Item(
-    val name: String,
+data class Item (
+    val name:String,
     val url: String
 )
 
@@ -108,3 +86,4 @@ data class NaturalGiftType(
     val name: String,
     val url: String
 )
+
