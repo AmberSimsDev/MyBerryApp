@@ -1,7 +1,10 @@
 package asdigital.myberryapp.data.remote.api
 
-import asdigital.myberryapp.data.remote.model.BerryDetail
-import asdigital.myberryapp.data.remote.model.BerryResponse
+//import asdigital.myberryapp.data.remote.model.BerryDetail
+import asdigital.myberryapp.data.remote.model.BerryDetailDTO
+import asdigital.myberryapp.data.remote.model.BerryDetailResponseDTO
+//import asdigital.myberryapp.data.remote.model.BerryResponse
+import asdigital.myberryapp.data.remote.model.BerryResponseDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -15,10 +18,10 @@ val pokeService = retrofit.create(PokemonApiService::class.java)
 
 interface PokemonApiService{
     @GET("berry")
-    suspend fun getPokeBerries(): BerryResponse
+    suspend fun getPokeBerries(): BerryResponseDTO  // before  "BerryResponse"
 
     @GET("berry/{berryName}/")
-    suspend fun getBerryDetail(@Path ("berryName") berryName: String): BerryDetail
+    suspend fun getBerryDetail(@Path ("berryName") berryName: String): BerryDetailDTO //before "BerryDetail
 }
 
 //@GET("berry/{id}/")

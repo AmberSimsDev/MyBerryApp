@@ -5,8 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import asdigital.myberryapp.data.remote.model.Berry
+//import asdigital.myberryapp.data.remote.model.Berry
 import asdigital.myberryapp.data.remote.api.pokeService
+import asdigital.myberryapp.data.remote.model.BerryDTO
 import kotlinx.coroutines.launch
 
 
@@ -43,7 +44,7 @@ class BerryViewModel : ViewModel() {
 
     data class PokeState(
         var loading: Boolean = true,
-        var list: List<Berry> = emptyList(),
+        var list: List<BerryDTO> = emptyList(),
         var error: String? = null
     )
    /* val _vmState = MutableStateFlow<State>(State.Idle)

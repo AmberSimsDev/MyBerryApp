@@ -19,8 +19,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import asdigital.myberryapp.data.remote.model.BerryDetail
+//import asdigital.myberryapp.data.remote.model.BerryDetail
 import asdigital.myberryapp.data.remote.api.getBerrySpriteUrl
+import asdigital.myberryapp.data.remote.model.BerryDetailDTO
+import asdigital.myberryapp.data.remote.model.BerryDetailResponseDTO
 import coil.compose.AsyncImage
 
 // navigateToDetail: (BerryDetail) -> Unit
@@ -28,7 +30,7 @@ import coil.compose.AsyncImage
 @Composable
 fun berryDetailScreen(navController: NavController, berryName: String?) {
     val viewModel: BerryDetailViewModel = viewModel()
-    val detailItem by viewModel.berryDetailState.collectAsState(initial = null)
+    val detailItem by viewModel.berryDetailState.collectAsState(initial = null) //check here
     val errorMessage by viewModel.errorMessage.collectAsState(initial = null)
     val isLoading by viewModel.isLoading.collectAsState(initial = false)
 
@@ -55,10 +57,10 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
             modifier = Modifier
                 .aspectRatio(6f)
         )
-        detailItem?.let { //TODO study this more
+        detailItem?.let {//TODO study this more
             // LETS MAKE IT SO WE CAN SCROLL THE TEXT
             Text(
-                text = formatBerryDetails(detailTextItem = it),
+                text = formatBerryDetails(detailTextItem = it), //fix whats happening here
                 textAlign = TextAlign.Justify,
                 modifier = Modifier.verticalScroll(rememberScrollState())
             )
@@ -67,7 +69,7 @@ fun berryDetailScreen(navController: NavController, berryName: String?) {
 }
 
 //CONVERT DATA CLASS TO STRINGS
-fun formatBerryDetails(detailTextItem: BerryDetail): String {
+fun formatBerryDetails(detailTextItem: BerryDetailDTO): String {
     return """
               ID: ${detailTextItem.id}
               Name: ${detailTextItem.name}

@@ -22,8 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import asdigital.myberryapp.data.remote.model.Berry
+//import asdigital.myberryapp.data.remote.model.Berry
 import asdigital.myberryapp.data.remote.api.getBerrySpriteUrl
+import asdigital.myberryapp.data.remote.model.BerryDTO
 import coil.compose.AsyncImage
 
 
@@ -50,7 +51,7 @@ fun pokeScreen(modifier: Modifier, navController : NavController) {
 
 //Has the list of each berry item
 @Composable
-fun berryScreen(pokeBerries: List<Berry>, navController: NavController) {
+fun berryScreen(pokeBerries: List<BerryDTO>, navController: NavController) {
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(pokeBerries) { berry ->
             berryItemView(berryItem = berry, navController = navController)
@@ -61,7 +62,7 @@ fun berryScreen(pokeBerries: List<Berry>, navController: NavController) {
 
 //How each item looks
 @Composable
-fun berryItemView(berryItem: Berry, navController: NavController ) {
+fun berryItemView(berryItem: BerryDTO, navController: NavController ) {
     Column(
         modifier = Modifier
             .padding(6.dp)
