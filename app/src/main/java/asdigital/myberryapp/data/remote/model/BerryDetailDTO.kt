@@ -1,34 +1,17 @@
-package asdigital.myberryapp.data
+package asdigital.myberryapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Berry(
-    val name: String,
+//data class BerryDetailResponse(val berryDetail: List<BerryDetailDTO>)
 
-)
-
-//data class BerryResponse(
-//    val results: List<Berry>
-//    //val count: Int,
-//    //val next: String?,
-//    // val previous: String?,
-//)
-//data class BerryDetailResponse(
-//    val results: List<BerryDetail>,
-//    val url: String
-//)
-
-data class BerryResponse( val results: List<Berry>)
-data class BerryDetailResponse(val berryDetail: List<BerryDetail>)
-
-data class BerryDetail(
+data class BerryDetailDTO(
     val id: Int,
     val name: String,
     @SerializedName("growth_time") val growthTime: Int,
     @SerializedName("max_harvest") val maxHarvest: Int,
     @SerializedName("natural_gift_power") val naturalGiftPower: Int,
     val size: Int,
-    val smoothness:Int,
+    val smoothness: Int,
     @SerializedName("soil_dryness") val soilDryness: Int,
     val firmness: Firmness,
     val flavors: List<Flavors>,
@@ -61,4 +44,21 @@ data class NaturalGiftType(
 )
 
 
-
+fun getBerryDetailDTOList(berryDetail: List<BerryDetailDTO>): List<BerryDetailDTO> {
+    return berryDetail.map { details ->
+        BerryDetailDTO(
+            id = details.id,
+            name = details.name,
+            growthTime = details.growthTime,
+            maxHarvest = details.maxHarvest,
+            naturalGiftPower = details.naturalGiftPower,
+            size = details.size,
+            smoothness = details.smoothness,
+            soilDryness = details.soilDryness,
+            firmness = details.firmness,
+            flavors = details.flavors,
+            item = details.item,
+            naturalGiftType = details.naturalGiftType
+        )
+    }
+}
